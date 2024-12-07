@@ -1,4 +1,4 @@
-package org.wayggstar.jibyeolWar.Ability.Abilities
+package org.wayggstar.jibyeolAbility.Ability.Abilities
 
 import org.bukkit.Bukkit
 import org.bukkit.entity.Arrow
@@ -10,17 +10,15 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
-import org.wayggstar.jibyeolWar.Ability.Ability
-import org.wayggstar.jibyeolWar.GameManager
-import org.wayggstar.jibyeolWar.JibyeolWar
+import org.wayggstar.jibyeolAbility.Ability.Ability
+import org.wayggstar.jibyeolAbility.GameManger
 
-class Artemis: Ability, Listener {
-    private lateinit var gameManager: GameManager
+class Artemis(private val gameManager: GameManger): Ability, Listener { // 생성자로 gameManager 전달
 
     override val name: String = "아르테미스"
     override val description: List<String> = listOf(
-        "화살을 적에게 맞출시에 적은 5초간 §b발광§r효과에 걸립니다.",
-        "발광효과에 걸린적은 §c받는 피해§r가 10% 증가합니다."
+        "화살을 적에게 맞출시에 적은 5초간 §b발광§7효과에 걸립니다.",
+        "발광효과에 걸린적은 §c받는 근접피해§7가 20% 증가합니다."
     )
     override val rank: String = "A"
 
@@ -32,12 +30,11 @@ class Artemis: Ability, Listener {
         if (projectile is Arrow) {
             val shooter = projectile.shooter
             if (shooter is Player) {
-                if (!isArtemis(shooter))return
+                if (!isArtemis(shooter)) return
                 arrowShooters[projectile] = shooter
             }
         }
     }
-
 
     @EventHandler
     fun onEntityHitByArrow(event: EntityDamageByEntityEvent) {
@@ -48,15 +45,20 @@ class Artemis: Ability, Listener {
             val target = event.entity
 
             if (shooter != null && target is LivingEntity) {
-                target.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 100, 4))
+                if (isArtemis(shooter)) {
+                    target.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 100, 4))
+                }else{
+                    return
+                }
             }
             arrowShooters.remove(damager)
         }
-        if (damager is Player){
-            if (vic is LivingEntity){
-                if (vic.hasPotionEffect(PotionEffectType.GLOWING)){
+
+        if (damager is Player) {
+            if (vic is LivingEntity) {
+                if (vic.hasPotionEffect(PotionEffectType.GLOWING)) {
                     val originalDamage = event.damage
-                    val increasedDamage = originalDamage * 1.1
+                    val increasedDamage = originalDamage * 1.2
                     event.damage = increasedDamage
                     damager.sendMessage("§a발광 효과로 ${vic.name}에게 추가 피해를 입혔습니다!")
                 }
@@ -65,9 +67,6 @@ class Artemis: Ability, Listener {
     }
 
     override fun activate() {
-    }
-
-    override fun deactivate() {
     }
 
     private fun isArtemis(player: Player): Boolean {

@@ -2,3 +2,7 @@ name: JibyeolAbility
 version: '1.0'
 main: org.wayggstar.jibyeolAbility.JibyeolAbility
 api-version: '1.20'
+commands:
+  능력자:
+    description: 게임 종합 명령어
+
