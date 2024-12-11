@@ -43,8 +43,10 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
                 cooldownManager.notifyCooldown(player, "페르세포네")
                 return
             }
-
+            createDeathGarden(player.location)
             player.sendMessage("§5죽음§7의 꽃밭을 불러옵니다")
+            cooldownManager.startCooldown(player, "페르세포네", 30L) // 10초 쿨타임
+
         }
     }
 

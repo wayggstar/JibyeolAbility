@@ -13,10 +13,11 @@ import org.bukkit.potion.PotionEffectType
 import org.wayggstar.jibyeolAbility.Ability.Ability
 import org.wayggstar.jibyeolAbility.GameManger
 
-class Artemis(private val gameManager: GameManger): Ability, Listener { // 생성자로 gameManager 전달
+class Artemis(private val gameManager: GameManger): Ability, Listener {
 
     override val name: String = "아르테미스"
     override val description: List<String> = listOf(
+        "§e달§7과 §c사냥§7의 §e여신",
         "화살을 적에게 맞출시에 적은 5초간 §b발광§7효과에 걸립니다.",
         "발광효과에 걸린적은 §c받는 근접피해§7가 20% 증가합니다."
     )

@@ -1,5 +1,5 @@
 name: JibyeolAbility
-version: '1.0'
+version: 'BETA 1.0.2'
 main: org.wayggstar.jibyeolAbility.JibyeolAbility
 api-version: '1.20'
 commands:

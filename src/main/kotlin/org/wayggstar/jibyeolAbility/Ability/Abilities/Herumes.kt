@@ -21,7 +21,7 @@ class Herumes(private var gameManger: GameManger, private var cooldownManager: c
 
     override val name: String = "헤르메스"
     override val description: List<String> = listOf(
-        "§a여행§7의 §e신§7이다.",
+        "§a여행§7의 §e신",
         "§c낙하데미지§7를 받지 않습니다.",
         "§f철괴§7를 우클릭할 시 5초간 §b비행§7한다.(§c쿨타임§7: §630§7초)"
     )
