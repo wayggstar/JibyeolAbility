@@ -3,6 +3,7 @@ package org.wayggstar.jibyeolAbility
 import org.bukkit.plugin.java.JavaPlugin
 import org.wayggstar.jibyeolAbility.Ability.Abilities.Artemis
 import org.wayggstar.jibyeolAbility.Ability.Abilities.Herumes
+import org.wayggstar.jibyeolAbility.Ability.Abilities.Persepone
 import org.wayggstar.jibyeolAbility.Ability.Abilities.Thor
 import org.wayggstar.jibyeolAbility.Ability.cooldownManager
 import org.wayggstar.jibyeolAbility.Command.Command
@@ -31,6 +32,7 @@ class JibyeolAbility : JavaPlugin() {
         gameManager.initializeAbilitiesConfig()
         server.pluginManager.registerEvents(Thor(gameManager), this)
         server.pluginManager.registerEvents(Artemis(gameManager), this)
+        server.pluginManager.registerEvents(Persepone(gameManager, cooldownManager), this)
         server.pluginManager.registerEvents(Herumes(gameManager, cooldownManager), this)
 
 
