@@ -11,10 +11,7 @@ import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
 import org.bukkit.plugin.java.JavaPlugin
-import org.wayggstar.jibyeolAbility.Ability.Abilities.Artemis
-import org.wayggstar.jibyeolAbility.Ability.Abilities.Herumes
-import org.wayggstar.jibyeolAbility.Ability.Abilities.Persepone
-import org.wayggstar.jibyeolAbility.Ability.Abilities.Thor
+import org.wayggstar.jibyeolAbility.Ability.Abilities.*
 import org.wayggstar.jibyeolAbility.Ability.Ability
 import org.wayggstar.jibyeolAbility.Ability.cooldownManager
 import java.io.File
@@ -29,7 +26,8 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         Thor(this),
         Artemis(this),
         Herumes(this, cooldownManager),
-        Persepone(this, cooldownManager)
+        Persepone(this, cooldownManager),
+        Anubis(this, cooldownManager)
     )
 
     init {

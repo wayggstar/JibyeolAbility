@@ -19,7 +19,7 @@ class Thor(private var gameManager: GameManger) : Ability, Listener {
 
     override val name: String = "토르"
     override val description: List<String> = listOf(
-        "§b번개§7를 다루는 §e신§7이다.",
+        "§b번개§7의 §e신§7",
         "철도끼로 사람을 공격할 시 5% 확률로 번개를 내려친다.",
         "번개에 맞은 적은 2초간 §b감전§7되어서 움직일 수 없다."
     )
