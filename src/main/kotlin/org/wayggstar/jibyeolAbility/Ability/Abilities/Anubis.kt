@@ -35,7 +35,7 @@ class Anubis(private val gameManager: GameManger, private val cooldownManager: c
         val attacker = event.damager as? Player ?: return
         val target = event.entity as? LivingEntity ?: return
         val itemInHand = attacker.inventory.itemInMainHand
-        if (isAnubis(attacker)){return}
+        if (!isAnubis(attacker)){return}
         if ((itemInHand.type == Material.IRON_INGOT)){
             if (cooldownManager.isOnCooldown(attacker, "죽음의 심판")){
                 cooldownManager.notifyCooldown(attacker, "죽음의 심판")

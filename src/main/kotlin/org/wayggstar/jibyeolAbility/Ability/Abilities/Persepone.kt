@@ -36,7 +36,7 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
         val player = event.player
         val itemInHand = player.inventory.itemInMainHand
         val action = event.action
-        if (isPersepone(player)){return}
+        if (!isPersepone(player)){return}
         if ((itemInHand.type == Material.IRON_INGOT) && (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR)){
             if (event.hand != EquipmentSlot.HAND)return
             if (cooldownManager.isOnCooldown(player, "페르세포네")){

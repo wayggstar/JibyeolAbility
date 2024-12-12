@@ -27,7 +27,8 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         Artemis(this),
         Herumes(this, cooldownManager),
         Persepone(this, cooldownManager),
-        Anubis(this, cooldownManager)
+        Anubis(this, cooldownManager),
+        Hephaitos(this,cooldownManager)
     )
 
     init {
