@@ -14,6 +14,7 @@ class JibyeolAbility : JavaPlugin() {
 
     private lateinit var gameManager: GameManger
     private lateinit var cooldownManager: cooldownManager
+    private lateinit var command: Command
 
     override fun onEnable() {
 
@@ -25,7 +26,8 @@ class JibyeolAbility : JavaPlugin() {
         }
 
         cooldownManager = cooldownManager(this)
-        gameManager = GameManger(this, cooldownManager)
+        command = Command(gameManager)
+        gameManager = GameManger(this, cooldownManager, command)
         gameManager.initializeAbilitiesConfig()
         server.pluginManager.registerEvents(Thor(gameManager), this)
         server.pluginManager.registerEvents(Artemis(gameManager), this)

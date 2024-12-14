@@ -12,6 +12,8 @@ import org.wayggstar.jibyeolAbility.GameManger
 
 class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter {
 
+    public var ready: Boolean = false
+
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {
             when (args.getOrNull(0)) {
@@ -20,6 +22,7 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
                         sender.sendMessage("§a게임이 진행중입니다.")
                         return false
                     }
+                    ready = true
                     gameManger.startGame()
                     return true
                 }
@@ -41,6 +44,7 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
 
                 "수락" -> {
                     val ability = gameManger.getPlayerAbility(sender)
+                    if (!ready){return false}
                     if (ability != null) {
                         gameManger.confirmAbility(sender)
                         sender.sendMessage("§a능력이 확정되었습니다. 능력: '${ability.name}'")
@@ -52,6 +56,7 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
                 }
 
                 "거절" -> {
+                    if (!ready){return false}
                     gameManger.reassignAbility(sender) // 능력 거절 처리
                     sender.sendMessage("§c능력이 거절되었습니다. 새로운 능력이 재배정되었습니다.")
                     Bukkit.broadcastMessage("${sender.name}§a님이 능력을 거절하고 새로운 능력이 재배정되었습니다.")
