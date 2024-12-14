@@ -86,7 +86,7 @@ class Herumes(private var gameManger: GameManger, private var cooldownManager: c
         val entity = event.entity
         if (entity is Player){
             val damageCause = event.cause
-
+            if (!isHerumes(entity)){return}
             when (damageCause){
                 EntityDamageEvent.DamageCause.FALL -> event.isCancelled = true
                 else -> {}

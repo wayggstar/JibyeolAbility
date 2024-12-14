@@ -7,6 +7,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.inventory.EquipmentSlot
 import org.wayggstar.jibyeolAbility.Ability.Ability
 import org.wayggstar.jibyeolAbility.Ability.cooldownManager
 import org.wayggstar.jibyeolAbility.GameManger
@@ -15,7 +16,7 @@ class Hephaitos(private val gameManager: GameManger, private var cooldownManager
     override val name: String = "헤파이토스"
     override val description: List<String> = listOf(
         "§6대장장이§7의 §e신",
-        "§f철괴§7를 우클릭할 시 왼손에 있는 장비의 §b인첸트§7를 §6강화§7한다.(§c쿨타임§7: §630§7초)"    )
+        "§f철괴§7를 우클릭할 시 왼손에 있는 장비의 §b인첸트§7를 §6강화§7한다.(§c쿨타임§7: §660§7초)"    )
     override val rank: String = "A"
 
     @EventHandler
@@ -28,6 +29,7 @@ class Hephaitos(private val gameManager: GameManger, private var cooldownManager
             if (itemInOffHand.type != Material.AIR) {
                 val itemMeta = itemInOffHand.itemMeta ?: return
                 val enchantments = itemInOffHand.enchantments
+                if (event.hand != EquipmentSlot.HAND) return
                 if (cooldownManager.isOnCooldown(player, "헤파이토스")){
                     cooldownManager.notifyCooldown(player, "헤파이토스")
                     return
@@ -40,7 +42,7 @@ class Hephaitos(private val gameManager: GameManger, private var cooldownManager
                     player.world.spawnParticle(org.bukkit.Particle.FLAME, player.location, 50, 0.5, 0.5, 0.5, 0.05)
                     player.world.playSound(player.location, Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f)
                     player.sendMessage("§6헤파이스토스§7의 §e축복§7이 왼손 아이템에 적용되었습니다!")
-                    cooldownManager.startCooldown(player, "페르세포네", 50L)
+                    cooldownManager.startCooldown(player, "헤파이토스", 60L)
                 } else {
                     player.sendMessage("§c왼손에 인챈트된 아이템이 없습니다.")
                 }

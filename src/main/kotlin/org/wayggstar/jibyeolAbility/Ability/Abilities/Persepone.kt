@@ -8,6 +8,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
+import org.bukkit.event.entity.EntityDamageEvent
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.potion.PotionEffect
@@ -65,7 +66,7 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
         }
         for (x in -radius..radius){
             for (z in -radius..radius){
-                val flowerloc = center.clone().add(x.toDouble(), -1.0, z.toDouble())
+                val flowerloc = center.clone().add(x.toDouble(), -0.0, z.toDouble())
                 val block = world.getBlockAt(flowerloc)
                 if (block.type == Material.AIR && Random.nextBoolean()){
                     original[flowerloc] = block.type
@@ -99,11 +100,25 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
     private fun restoreOriginalBlocks(originalBlocks: Map<Location, Material>) {
         originalBlocks.forEach { (location, material) ->
             val block = location.world?.getBlockAt(location)
-            block?.type = material // 원래 블록으로 복원
+            block?.type = material
         }
     }
     private fun isPersepone(player: Player): Boolean {
         val ability = gameManager.getPlayerAbility(player)
         return ability is Persepone
+    }
+
+    @EventHandler
+    fun onWitherPoison(event: EntityDamageEvent){
+        val entity = event.entity
+        if (entity is Player){
+            val damageCause = event.cause
+            if(!isPersepone(entity)){return}
+            when (damageCause){
+                EntityDamageEvent.DamageCause.POISON -> event.isCancelled = true
+                EntityDamageEvent.DamageCause.WITHER -> event.isCancelled = true
+                else -> {}
+            }
+        }
     }
 }

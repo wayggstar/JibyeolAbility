@@ -16,6 +16,10 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
         if (sender is Player) {
             when (args.getOrNull(0)) {
                 "시작" -> {
+                    if (gameManger.gameplaying){
+                        sender.sendMessage("§a게임이 진행중입니다.")
+                        return false
+                    }
                     gameManger.startGame()
                     return true
                 }
@@ -27,6 +31,10 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
                 }
 
                 "종료" -> {
+                    if (!gameManger.gameplaying){
+                        sender.sendMessage("§a게임이 진행중이 아닙니다.")
+                        return false
+                    }
                     gameManger.endGame()
                     return true
                 }
@@ -55,6 +63,7 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
                     sender.sendMessage("§r§7/능력자 시작 §r§7- §7게임을 시작합니다.[§c§lOP전용§r§7]")
                     sender.sendMessage("§r§7/능력자 종료 §r§7- §7게임을 종료합니다.[§c§lOP전용§r§7]")
                     sender.sendMessage("§r§7/능력자 목록 §r§7- §7현재 존재하는 능력목록을 확인합니다.")
+                    sender.sendMessage("§r§7/능력자 §a수락§7/§c거절 §r§7- §7능력을 확정할지 거부할지 결정합니다.")
                     sender.sendMessage("§7====================================")
                 }
             }
