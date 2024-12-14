@@ -31,6 +31,7 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
     private val FLOWERS: List<Material> = listOf(
         Material.WITHER_ROSE
     )
+    private var deathflower: Boolean = false
 
     @EventHandler
     fun onIronRightClick(event: PlayerInteractEvent){
@@ -46,6 +47,7 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
             }
             createDeathGarden(player.location)
             player.sendMessage("§5죽음§7의 꽃밭을 불러옵니다")
+            deathflower = true
             cooldownManager.startCooldown(player, "페르세포네", 30L) // 10초 쿨타임
 
         }
@@ -83,13 +85,14 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
         object  : BukkitRunnable(){
             override fun run() {
                 restoreOriginalBlocks(original)
+                deathflower = false
             }
         }.runTaskLater(JibyeolAbility.instance, 160L)
     }
 
     private fun applyPoisonEffect(center: Location, radius: Int) {
         val world = center.world ?: return
-
+        if (!deathflower){return}
         world.players.forEach { player ->
             if (player.location.distance(center) <= radius) {
                 player.addPotionEffect(PotionEffect(PotionEffectType.POISON, 60, 1, true, true))
