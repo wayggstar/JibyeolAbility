@@ -31,7 +31,7 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
     private val FLOWERS: List<Material> = listOf(
         Material.WITHER_ROSE
     )
-    private var deathflower: Boolean = false
+    private var deathflower: MutableMap<Player, Boolean> = mutableMapOf()
 
     @EventHandler
     fun onIronRightClick(event: PlayerInteractEvent){
@@ -45,15 +45,15 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
                 cooldownManager.notifyCooldown(player, "페르세포네")
                 return
             }
-            createDeathGarden(player.location)
+            createDeathGarden(player.location, player)
             player.sendMessage("§5죽음§7의 꽃밭을 불러옵니다")
-            deathflower = true
+            deathflower.put(player, true)
             cooldownManager.startCooldown(player, "페르세포네", 30L) // 10초 쿨타임
 
         }
     }
 
-    private fun createDeathGarden(center: Location){
+    private fun createDeathGarden(center: Location, caster: Player){
         val world = center.world ?: return
         val radius = 3
         val original = mutableMapOf<Location, Material>()
@@ -78,21 +78,21 @@ class Persepone(private val gameManager: GameManger, private var cooldownManager
         }
         object : BukkitRunnable() {
             override fun run() {
-                applyPoisonEffect(center,radius)
+                applyPoisonEffect(center,radius, caster)
             }
         }.runTaskTimer(JibyeolAbility.instance, 0L, 20L,)
 
         object  : BukkitRunnable(){
             override fun run() {
                 restoreOriginalBlocks(original)
-                deathflower = false
+                deathflower.put(caster, false)
             }
         }.runTaskLater(JibyeolAbility.instance, 160L)
     }
 
-    private fun applyPoisonEffect(center: Location, radius: Int) {
+    private fun applyPoisonEffect(center: Location, radius: Int, caster: Player) {
         val world = center.world ?: return
-        if (!deathflower){return}
+        if (deathflower.get(caster) == false){return}
         world.players.forEach { player ->
             if (player.location.distance(center) <= radius) {
                 player.addPotionEffect(PotionEffect(PotionEffectType.POISON, 60, 1, true, true))

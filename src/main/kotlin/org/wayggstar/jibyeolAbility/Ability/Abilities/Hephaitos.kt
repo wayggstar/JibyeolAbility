@@ -39,7 +39,7 @@ class Hephaitos(private val gameManager: GameManger, private var cooldownManager
                         val newLevel = (level + 1)
                         itemInOffHand.addUnsafeEnchantment(enchantment, newLevel)
                     }
-                    player.world.spawnParticle(org.bukkit.Particle.FLAME, player.location, 50, 0.5, 0.5, 0.5, 0.05)
+                    player.world.spawnParticle(org.bukkit.Particle.LAVA, player.location, 50, 0.5, 0.5, 0.5, 0.05)
                     player.world.playSound(player.location, Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f)
                     player.sendMessage("§6헤파이스토스§7의 §e축복§7이 왼손 아이템에 적용되었습니다!")
                     cooldownManager.startCooldown(player, "헤파이토스", 60L)
