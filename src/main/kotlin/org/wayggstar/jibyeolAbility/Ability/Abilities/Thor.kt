@@ -9,6 +9,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.scheduler.BukkitRunnable
 import org.wayggstar.jibyeolAbility.Ability.Ability
+import org.wayggstar.jibyeolAbility.Debuff.Debuff
 import org.wayggstar.jibyeolAbility.GameManger
 import org.wayggstar.jibyeolAbility.JibyeolAbility
 import kotlin.random.Random
@@ -33,6 +34,10 @@ class Thor(private var gameManager: GameManger) : Ability, Listener {
         val attacker = event.damager as? Player ?: return
         val target = event.entity
         if (!isThor(attacker)) return
+        if (Debuff.hasDebuff(attacker, Debuff.DebuffType.Silence)) {
+            attacker.sendMessage("§c현재 침묵 상태로 인해 능력을 사용할 수 없습니다!")
+            return
+        }
         if (attacker.inventory.itemInMainHand.type == Material.IRON_AXE) {
             val chance = Random.nextInt(100)
             if (chance < 20) {

@@ -35,6 +35,8 @@ class JibyeolAbility : JavaPlugin() {
         server.pluginManager.registerEvents(Herumes(gameManager, cooldownManager), this)
         server.pluginManager.registerEvents(Anubis(gameManager, cooldownManager), this)
         server.pluginManager.registerEvents(Hephaitos(gameManager, cooldownManager), this)
+        server.pluginManager.registerEvents(Heracules(gameManager), this)
+        server.pluginManager.registerEvents(Kali(gameManager, cooldownManager), this)
 
         getCommand("능력자")?.setExecutor(Command(gameManager))
 

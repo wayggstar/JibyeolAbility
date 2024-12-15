@@ -11,6 +11,7 @@ import org.bukkit.event.entity.ProjectileLaunchEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.wayggstar.jibyeolAbility.Ability.Ability
+import org.wayggstar.jibyeolAbility.Debuff.Debuff
 import org.wayggstar.jibyeolAbility.GameManger
 
 class Artemis(private val gameManager: GameManger): Ability, Listener {
@@ -32,6 +33,10 @@ class Artemis(private val gameManager: GameManger): Ability, Listener {
             val shooter = projectile.shooter
             if (shooter is Player) {
                 if (!isArtemis(shooter)) return
+                if (Debuff.hasDebuff(shooter, Debuff.DebuffType.Silence)) {
+                    shooter.sendMessage("§c현재 침묵 상태로 인해 능력을 사용할 수 없습니다!")
+                    return
+                }
                 arrowShooters[projectile] = shooter
             }
         }

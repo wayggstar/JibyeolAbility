@@ -17,6 +17,7 @@ import org.bukkit.potion.PotionEffectType
 import org.bukkit.scheduler.BukkitRunnable
 import org.wayggstar.jibyeolAbility.Ability.Ability
 import org.wayggstar.jibyeolAbility.Ability.cooldownManager
+import org.wayggstar.jibyeolAbility.Debuff.Debuff
 import org.wayggstar.jibyeolAbility.GameManger
 import org.wayggstar.jibyeolAbility.JibyeolAbility
 
@@ -36,6 +37,10 @@ class Anubis(private val gameManager: GameManger, private val cooldownManager: c
         val target = event.entity as? LivingEntity ?: return
         val itemInHand = attacker.inventory.itemInMainHand
         if (!isAnubis(attacker)){return}
+        if (Debuff.hasDebuff(attacker, Debuff.DebuffType.Silence)) {
+            attacker.sendMessage("§c현재 침묵 상태로 인해 능력을 사용할 수 없습니다!")
+            return
+        }
         if ((itemInHand.type == Material.IRON_INGOT)){
             if (cooldownManager.isOnCooldown(attacker, "죽음의 심판")){
                 cooldownManager.notifyCooldown(attacker, "죽음의 심판")

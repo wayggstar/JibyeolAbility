@@ -10,6 +10,7 @@ import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.wayggstar.jibyeolAbility.Ability.Ability
 import org.wayggstar.jibyeolAbility.Ability.cooldownManager
+import org.wayggstar.jibyeolAbility.Debuff.Debuff
 import org.wayggstar.jibyeolAbility.GameManger
 
 class Hephaitos(private val gameManager: GameManger, private var cooldownManager: cooldownManager): Listener, Ability {
@@ -25,6 +26,10 @@ class Hephaitos(private val gameManager: GameManger, private var cooldownManager
         val itemInMainHand = player.inventory.itemInMainHand
         val itemInOffHand = player.inventory.itemInOffHand
         if (!isHephaitos(player)){return}
+        if (Debuff.hasDebuff(player, Debuff.DebuffType.Silence)) {
+            player.sendMessage("§c현재 침묵 상태로 인해 능력을 사용할 수 없습니다!")
+            return
+        }
         if (itemInMainHand.type == Material.IRON_INGOT && (event.action == Action.RIGHT_CLICK_AIR|| event.action == Action.RIGHT_CLICK_BLOCK)) {
             if (itemInOffHand.type != Material.AIR) {
                 val itemMeta = itemInOffHand.itemMeta ?: return
@@ -39,7 +44,7 @@ class Hephaitos(private val gameManager: GameManger, private var cooldownManager
                         val newLevel = (level + 1)
                         itemInOffHand.addUnsafeEnchantment(enchantment, newLevel)
                     }
-                    player.world.spawnParticle(org.bukkit.Particle.FLAME, player.location, 50, 0.5, 0.5, 0.5, 0.05)
+                    player.world.spawnParticle(org.bukkit.Particle.LAVA, player.location, 50, 0.5, 0.5, 0.5, 0.05)
                     player.world.playSound(player.location, Sound.BLOCK_ANVIL_USE, 1.0f, 1.0f)
                     player.sendMessage("§6헤파이스토스§7의 §e축복§7이 왼손 아이템에 적용되었습니다!")
                     cooldownManager.startCooldown(player, "헤파이토스", 60L)

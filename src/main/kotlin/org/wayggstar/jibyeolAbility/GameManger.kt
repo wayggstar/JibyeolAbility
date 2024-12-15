@@ -29,7 +29,9 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         Herumes(this, cooldownManager),
         Persepone(this, cooldownManager),
         Anubis(this, cooldownManager),
-        Hephaitos(this,cooldownManager)
+        Hephaitos(this,cooldownManager),
+        Heracules(this),
+        Kali(this, cooldownManager)
     )
 
     init {
