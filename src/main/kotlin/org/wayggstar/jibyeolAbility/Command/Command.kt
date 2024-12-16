@@ -97,7 +97,7 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
 
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
         if (args.size == 1) {
-            return getSuggestions(args[0], listOf("시작", "목록", "종료", "수락", "거절"))
+            return getSuggestions(args[0], listOf("시작", "종료", "확인", "목록", "수락", "거절"))
         }
         return mutableListOf()
     }
