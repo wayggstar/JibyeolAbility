@@ -45,8 +45,9 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         val players = Bukkit.getOnlinePlayers()
         if (players.size == confirmedPlayers.size) {
             Bukkit.broadcastMessage("§a모든 플레이어가 능력을 확정했습니다. 게임을 시작합니다!")
-            startGame()
             Command.ready = false
+            gameplaying = true
+
         }
     }
 

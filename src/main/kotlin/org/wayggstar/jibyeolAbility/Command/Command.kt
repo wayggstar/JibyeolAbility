@@ -44,6 +44,19 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
                     return true
                 }
 
+                "확인" -> {
+                    val Abil = gameManger.getPlayerAbility(sender)
+
+                    if (Abil != null) {
+                        sender.sendMessage(Abil.name)
+                        sender.sendMessage("§e등급: ${Abil.name}")
+                        sender.sendMessage("§7능력 설명:")
+                        Abil.description.forEach { sender.sendMessage("§7$it") }
+                    }else{
+                        sender.sendMessage("§c활성화된 능력이 없습니다.")
+                    }
+                }
+
                 "수락" -> {
                     val ability = gameManger.getPlayerAbility(sender)
                     if (!ready){return false}
@@ -70,6 +83,7 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
                     sender.sendMessage("§r§7/능력자 시작 §r§7- §7게임을 시작합니다.[§c§lOP전용§r§7]")
                     sender.sendMessage("§r§7/능력자 종료 §r§7- §7게임을 종료합니다.[§c§lOP전용§r§7]")
                     sender.sendMessage("§r§7/능력자 목록 §r§7- §7현재 존재하는 능력목록을 확인합니다.")
+                    sender.sendMessage("§r§7/능력자 확인 §r§7- §7현재 자신의 능력을 확인합니다.")
                     sender.sendMessage("§r§7/능력자 §a수락§7/§c거절 §r§7- §7능력을 확정할지 거부할지 결정합니다.")
                     sender.sendMessage("§7====================================")
                 }
