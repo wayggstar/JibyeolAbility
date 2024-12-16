@@ -40,7 +40,7 @@ class Heracules(private val gameManager: GameManger): Ability, Listener {
             event.isCancelled = true
             return
         }
-        if ((health <= event.finalDamage)){
+        if ((health <= event.finalDamage || health <= 2.0)){
             activateAbility(player)
             event.isCancelled = true
         }
