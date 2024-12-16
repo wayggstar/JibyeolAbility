@@ -39,6 +39,10 @@ class Kutulu(private val gameManager: GameManger, private val cooldownManager: c
         val itemInHand = player.inventory.itemInMainHand
         val action = event.action
         if (!isKutulu(player)){return}
+        if (Debuff.hasDebuff(player, Debuff.DebuffType.Silence)) {
+            player.sendMessage("§c현재 침묵 상태로 인해 능력을 사용할 수 없습니다!")
+            return
+        }
         if ((itemInHand.type == Material.IRON_INGOT) && (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR)){
             if (event.hand != EquipmentSlot.HAND)return
             if (cooldownManager.isOnCooldown(player, "크툴루")){

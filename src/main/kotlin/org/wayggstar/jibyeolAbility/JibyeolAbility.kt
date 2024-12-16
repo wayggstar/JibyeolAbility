@@ -39,6 +39,7 @@ class JibyeolAbility : JavaPlugin() {
         server.pluginManager.registerEvents(Kali(gameManager, cooldownManager), this)
         server.pluginManager.registerEvents(Kutulu(gameManager,cooldownManager), this)
         server.pluginManager.registerEvents(Ra(gameManager, cooldownManager), this)
+        server.pluginManager.registerEvents(Yormungande(gameManager, cooldownManager), this)
 
         getCommand("능력자")?.setExecutor(Command(gameManager))
 

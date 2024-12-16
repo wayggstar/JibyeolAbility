@@ -12,6 +12,7 @@ import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 import org.wayggstar.jibyeolAbility.Ability.Ability
 import org.wayggstar.jibyeolAbility.Ability.cooldownManager
+import org.wayggstar.jibyeolAbility.Debuff.Debuff
 import org.wayggstar.jibyeolAbility.GameManger
 
 class Ra(private val gameManager: GameManger, private val cooldownManager: cooldownManager): Ability, Listener {
@@ -30,6 +31,10 @@ class Ra(private val gameManager: GameManger, private val cooldownManager: coold
         val itemInHand = player.inventory.itemInMainHand
         val action = event.action
         if (!isRa(player)){return}
+        if (Debuff.hasDebuff(player, Debuff.DebuffType.Silence)) {
+            player.sendMessage("§c현재 침묵 상태로 인해 능력을 사용할 수 없습니다!")
+            return
+        }
         if ((itemInHand.type == Material.IRON_INGOT) && (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR)){
             if (event.hand != EquipmentSlot.HAND)return
             if (cooldownManager.isOnCooldown(player, "태양")){
@@ -38,16 +43,20 @@ class Ra(private val gameManager: GameManger, private val cooldownManager: coold
             }
             Bukkit.getServer().broadcastMessage("§6태양 §e빛§a이 강해집니다.")
             sunRising(player)
+            player.world.time.times(0)
             cooldownManager.startCooldown(player, "태양", 40L)
         }
     }
 
     private fun sunRising(player: Player){
-        for (player in Bukkit.getOnlinePlayers()){
-            player.fireTicks = 100
+        for (target in Bukkit.getOnlinePlayers()){
+            if (target == player){
+                player.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 100, 2))
+                player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 100, 0))
+                return
+            }
+            target.fireTicks = 100
         }
-        player.addPotionEffect(PotionEffect(PotionEffectType.REGENERATION, 100, 2))
-        player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 100, 0))
     }
     private fun isRa(player: Player): Boolean {
         val ability = gameManager.getPlayerAbility(player)
