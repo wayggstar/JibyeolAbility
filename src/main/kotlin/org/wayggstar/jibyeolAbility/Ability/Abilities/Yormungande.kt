@@ -37,21 +37,21 @@ class Yormungande(private val gameManager: GameManger, private val cooldownManag
         }
         if ((itemInHand.type == Material.IRON_INGOT) && (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR)){
             if (event.hand != EquipmentSlot.HAND)return
-            if (cooldownManager.isOnCooldown(player, "요르문철")){
-                cooldownManager.notifyCooldown(player, "요르문철")
+            if (cooldownManager.isOnCooldown(player, "독안개")){
+                cooldownManager.notifyCooldown(player, "독안개")
                 return
             }
             IronYormun(player)
-            cooldownManager.startCooldown(player, "요르문철", 30L)
+            cooldownManager.startCooldown(player, "독안개", 30L)
         }
         if ((itemInHand.type == Material.GOLD_INGOT) && (action == Action.RIGHT_CLICK_BLOCK || action == Action.RIGHT_CLICK_AIR)){
             if (event.hand != EquipmentSlot.HAND)return
-            if (cooldownManager.isOnCooldown(player, "요르문금")){
-                cooldownManager.notifyCooldown(player, "요르문금")
+            if (cooldownManager.isOnCooldown(player, "세계의 감시자")){
+                cooldownManager.notifyCooldown(player, "세계의 감시자")
                 return
             }
             GoldYormun(player)
-            cooldownManager.startCooldown(player, "요르문금", 30L)
+            cooldownManager.startCooldown(player, "세계의 감시자", 30L)
         }
     }
 
@@ -68,10 +68,10 @@ class Yormungande(private val gameManager: GameManger, private val cooldownManag
 
     private fun GoldYormun(player: Player){
         for (target in Bukkit.getOnlinePlayers()){
+            target.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 100, 0))
             if(target == player){
                 target.removePotionEffect(PotionEffectType.GLOWING)
             }
-            target.addPotionEffect(PotionEffect(PotionEffectType.GLOWING, 100, 0))
         }
     }
 
