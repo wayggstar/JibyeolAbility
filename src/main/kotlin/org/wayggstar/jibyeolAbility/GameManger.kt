@@ -87,10 +87,10 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         if (enabledAbilities.isNotEmpty()) {
             val randomAbility = enabledAbilities.random()
             playerAbilities[player] = randomAbility
-            player.sendMessage("§a당신의 능력은 '${randomAbility.name}'입니다!")
+            player.sendMessage("§a당신의 능력은 '${randomAbility.name}§a'입니다!")
             player.sendMessage("§e등급: ${randomAbility.rank}")
             player.sendMessage("§7능력 설명:")
-            randomAbility.description.forEach { player.sendMessage("§7- $it") }
+            randomAbility.description.forEach { player.sendMessage("§7$it") }
             randomAbility.activate()
         } else {
             player.sendMessage("§c활성화된 능력이 없습니다.")
@@ -102,7 +102,7 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         if (enabledAbilities.isNotEmpty()) {
             val randomAbility = enabledAbilities.random()
             playerAbilities[player] = randomAbility
-            player.sendMessage("§a당신의 능력이 다시 재추첨되었습니다. 새로운 능력은 '${randomAbility.name}'입니다!")
+            player.sendMessage("§a당신의 능력이 다시 재추첨되었습니다. 새로운 능력은 '${randomAbility.name}§a'입니다!")
             player.sendMessage("§e등급: ${randomAbility.rank}")
             player.sendMessage("§7능력 설명:")
             randomAbility.description.forEach { player.sendMessage("§7- $it") }

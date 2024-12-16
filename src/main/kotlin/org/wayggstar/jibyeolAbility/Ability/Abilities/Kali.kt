@@ -56,9 +56,13 @@ class Kali(private val gameManager: GameManger, private var cooldownManager: coo
         location.world?.playSound(location, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f)
         createVisualEffect(player, 10)
 
-        Bukkit.getScheduler().runTaskTimer(JibyeolAbility.instance, Runnable {
+        val taskId = Bukkit.getScheduler().runTaskTimer(JibyeolAbility.instance, Runnable {
             createKaliZone(player)
-        }, 0L, 20L)
+        }, 0L, 20L).taskId
+
+        Bukkit.getScheduler().runTaskLater(JibyeolAbility.instance, Runnable {
+            Bukkit.getScheduler().cancelTask(taskId)
+        }, 200L)
 
         Bukkit.getScheduler().runTaskLater(JibyeolAbility.instance, Runnable {
             player.sendMessage("§a칼리의 분노가 끝났습니다!")
@@ -69,12 +73,14 @@ class Kali(private val gameManager: GameManger, private var cooldownManager: coo
         val location = player.location
         val world = location.world ?: return
 
-        Bukkit.getScheduler().runTaskTimer(JibyeolAbility.instance, Runnable {
+        val taskId = Bukkit.getScheduler().runTaskTimer(JibyeolAbility.instance, Runnable {
             world.spawnParticle(Particle.SMOKE_LARGE, location, 50, 1.0, 1.0, 1.0, 0.1)
             world.spawnParticle(Particle.REDSTONE, location, 50, 1.0, 1.0, 1.0, 0.1)
-        }, 0L, 5L)
+        }, 0L, 5L).taskId
 
-        Bukkit.getScheduler().runTaskLater(JibyeolAbility.instance, Runnable {}, duration * 20L)
+        Bukkit.getScheduler().runTaskLater(JibyeolAbility.instance, Runnable {
+            Bukkit.getScheduler().cancelTask(taskId)
+        }, duration * 20L)
     }
 
     private fun createKaliZone(player: Player) {
@@ -87,7 +93,6 @@ class Kali(private val gameManager: GameManger, private var cooldownManager: coo
                 Debuff.addDebuff(entity, Debuff.DebuffType.Silence, 30)
             }
         }
-
         world.spawnParticle(Particle.PORTAL, location, 100, radius, 0.5, radius, 0.1)
     }
 
