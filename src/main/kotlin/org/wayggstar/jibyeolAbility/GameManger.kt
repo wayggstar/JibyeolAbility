@@ -18,7 +18,7 @@ import org.wayggstar.jibyeolAbility.Command.Command
 import java.io.File
 import java.io.IOException
 
-class GameManger(private val plugin: JavaPlugin, private val cooldownManager: cooldownManager, private val command: Command) {
+class GameManger(private val plugin: JavaPlugin, private val cooldownManager: cooldownManager) {
     private lateinit var abilitiesConfig: FileConfiguration
     public var gameplaying: Boolean = false
     private val playerAbilities: MutableMap<Player, Ability> = mutableMapOf()
@@ -46,7 +46,7 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         if (players.size == confirmedPlayers.size) {
             Bukkit.broadcastMessage("§a모든 플레이어가 능력을 확정했습니다. 게임을 시작합니다!")
             startGame()
-            command.ready = false
+            Command.ready = false
         }
     }
 

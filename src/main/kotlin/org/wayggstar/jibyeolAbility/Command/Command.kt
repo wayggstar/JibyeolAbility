@@ -12,7 +12,9 @@ import org.wayggstar.jibyeolAbility.GameManger
 
 class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter {
 
-    public var ready: Boolean = false
+    companion object {
+        public var ready: Boolean = false
+    }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (sender is Player) {

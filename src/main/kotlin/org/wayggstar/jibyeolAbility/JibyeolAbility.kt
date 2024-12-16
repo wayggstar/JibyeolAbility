@@ -26,8 +26,8 @@ class JibyeolAbility : JavaPlugin() {
         }
 
         cooldownManager = cooldownManager(this)
+        gameManager = GameManger(this, cooldownManager)
         command = Command(gameManager)
-        gameManager = GameManger(this, cooldownManager, command)
         gameManager.initializeAbilitiesConfig()
         server.pluginManager.registerEvents(Thor(gameManager), this)
         server.pluginManager.registerEvents(Artemis(gameManager), this)
