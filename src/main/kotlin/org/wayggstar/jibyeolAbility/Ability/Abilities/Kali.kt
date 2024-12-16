@@ -20,7 +20,7 @@ import org.wayggstar.jibyeolAbility.GameManger
 import org.wayggstar.jibyeolAbility.JibyeolAbility
 
 class Kali(private val gameManager: GameManger, private var cooldownManager: cooldownManager): Listener, Ability {
-    override val name: String = "칼리"
+    override val name: String = "§5칼리"
     override val description: List<String> = listOf(
         "§5파괴§7의 §e여신",
         "§710초 동안 플레이어 주변에 칼리의 §0검은 영역§7을 생성한다",

@@ -22,7 +22,7 @@ import org.wayggstar.jibyeolAbility.JibyeolAbility
 import kotlin.random.Random
 
 class Persepone(private val gameManager: GameManger, private var cooldownManager: cooldownManager): Listener, Ability {
-    override val name: String = "페르세포네"
+    override val name: String = "§d페르세포네"
     override val description: List<String> = listOf(
         "§a봄§7과 §5지하§7세계의 §e여신§7이다.",
         "§2독, §0위더, §7데미지를 받지 않습니다.",

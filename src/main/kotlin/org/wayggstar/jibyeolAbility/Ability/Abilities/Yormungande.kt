@@ -16,7 +16,7 @@ import org.wayggstar.jibyeolAbility.Debuff.Debuff
 import org.wayggstar.jibyeolAbility.GameManger
 
 class Yormungande(private val gameManager: GameManger, private val cooldownManager: cooldownManager): Ability, Listener {
-    override val name: String = "요르문간드"
+    override val name: String = "§2요르문간드"
     override val description: List<String> = listOf(
         "§b세계§7의 §2뱀§7",
         "§f철괴§7를 우클릭할 시 주변적에게 §2독§72를 건다.",

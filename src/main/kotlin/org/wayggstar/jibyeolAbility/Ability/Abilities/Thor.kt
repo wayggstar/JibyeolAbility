@@ -18,7 +18,7 @@ class Thor(private var gameManager: GameManger) : Ability, Listener {
 
     private val stunnedTargets = mutableSetOf<Player>()
 
-    override val name: String = "토르"
+    override val name: String = "§b토르"
     override val description: List<String> = listOf(
         "§b번개§7의 §e신§7",
         "철도끼로 사람을 공격할 시 5% 확률로 번개를 내려친다.",

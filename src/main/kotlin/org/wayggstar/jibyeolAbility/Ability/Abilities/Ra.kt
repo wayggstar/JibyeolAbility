@@ -17,7 +17,7 @@ import org.wayggstar.jibyeolAbility.GameManger
 
 class Ra(private val gameManager: GameManger, private val cooldownManager: cooldownManager): Ability, Listener {
 
-    override val name: String = "라"
+    override val name: String = "§6라"
     override val description: List<String> = listOf(
         "§6태양§7의 §e신",
         "§f철괴§7를 우클릭 할시 §6태양 §e빛§7을 강화해 모든적에게 §c불§7을 붙이고",

@@ -16,7 +16,7 @@ import org.wayggstar.jibyeolAbility.GameManger
 
 class Artemis(private val gameManager: GameManger): Ability, Listener {
 
-    override val name: String = "아르테미스"
+    override val name: String = "§e아르테미스"
     override val description: List<String> = listOf(
         "§e달§7과 §c사냥§7의 §e여신",
         "화살을 적에게 맞출시에 적은 5초간 §b발광§7효과에 걸립니다.",

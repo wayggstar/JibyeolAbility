@@ -15,7 +15,7 @@ import org.wayggstar.jibyeolAbility.GameManger
 import org.wayggstar.jibyeolAbility.JibyeolAbility
 
 class Heracules(private val gameManager: GameManger): Ability, Listener {
-    override val name: String = "헤라클레스"
+    override val name: String = "§c헤라클레스"
     override val description: List<String> = listOf(
         "§c힘§7과 §6불굴§7의 §b의지§7를 지닌 §e영웅",
         "§7죽을 위기에 처할 때 3초동안 §f무적§7이 되고",

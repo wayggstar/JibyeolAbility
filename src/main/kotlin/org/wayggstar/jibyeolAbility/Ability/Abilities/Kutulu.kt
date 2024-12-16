@@ -25,7 +25,7 @@ import kotlin.random.Random
 
 class Kutulu(private val gameManager: GameManger, private val cooldownManager: cooldownManager, ): Ability, Listener {
 
-    override val name: String = "크툴루"
+    override val name: String = "§0크툴루"
     override val description: List<String> = listOf(
         "§5?????",
         "§f철괴§7를 우클릭하면 §7주변 플레이어의 정신에 혼란을 줍니다",

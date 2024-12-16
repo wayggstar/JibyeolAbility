@@ -20,7 +20,7 @@ import org.wayggstar.jibyeolAbility.JibyeolAbility
 
 class Herumes(private var gameManger: GameManger, private var cooldownManager: cooldownManager) : Ability, Listener {
 
-    override val name: String = "헤르메스"
+    override val name: String = "§b헤르메스"
     override val description: List<String> = listOf(
         "§a여행§7의 §e신",
         "§c낙하데미지§7를 받지 않습니다.",

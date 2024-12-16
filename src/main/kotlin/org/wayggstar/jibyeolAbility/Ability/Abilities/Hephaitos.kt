@@ -14,7 +14,7 @@ import org.wayggstar.jibyeolAbility.Debuff.Debuff
 import org.wayggstar.jibyeolAbility.GameManger
 
 class Hephaitos(private val gameManager: GameManger, private var cooldownManager: cooldownManager): Listener, Ability {
-    override val name: String = "헤파이토스"
+    override val name: String = "§6헤파이토스"
     override val description: List<String> = listOf(
         "§6대장장이§7의 §e신",
         "§f철괴§7를 우클릭할 시 왼손에 있는 장비의 §b인첸트§7를 §6강화§7한다.(§c쿨타임§7: §660§7초)"    )

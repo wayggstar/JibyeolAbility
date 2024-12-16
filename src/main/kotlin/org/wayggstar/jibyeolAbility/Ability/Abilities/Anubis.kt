@@ -22,7 +22,7 @@ import org.wayggstar.jibyeolAbility.GameManger
 import org.wayggstar.jibyeolAbility.JibyeolAbility
 
 class Anubis(private val gameManager: GameManger, private val cooldownManager: cooldownManager): Ability, Listener {
-    override val name: String = "아누비스"
+    override val name: String = "§5아누비스"
     override val description: List<String> = listOf(
         "§0죽은자§7들의 §5심판자§7",
         "§f철괴§7로 적을 §4타격§7할 시 §c적§7에게 §0죽음§7의 §5심판§7을 내립니다.(§c쿨타임§7: §650§7초)",
