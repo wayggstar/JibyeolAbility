@@ -25,9 +25,9 @@ class Kali(private val gameManager: GameManger, private var cooldownManager: coo
         "§5파괴§7의 §e여신",
         "§710초 동안 플레이어 주변에 칼리의 §0검은 영역§7을 생성한다",
         "§7영역 내 적들에게 §c지속 데미지(초당 2)§7와 §0침묵§7을 부여합니다.(§c쿨타임§7: §650§7초)",
-        "§7플레이어에게는 §4힘과 §b신속§7이 부여된다"
+        "§7플레이어에게는 §4힘과 §b신속§7이 부여된다.§5침묵§7을 무시합니다."
     )
-    override val rank: String = "S"
+    override val rank: String = "SS"
 
 
     @EventHandler
@@ -50,8 +50,8 @@ class Kali(private val gameManager: GameManger, private var cooldownManager: coo
 
     private fun activateKaliWrath(player: Player) {
         val location = player.location
-        player.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10 * 20, 1)) // 힘 2
-        player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10 * 20, 1)) // 스피드 2
+        player.addPotionEffect(PotionEffect(PotionEffectType.INCREASE_DAMAGE, 10 * 20, 1))
+        player.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 10 * 20, 1))
 
         location.world?.playSound(location, Sound.ENTITY_WITHER_SPAWN, 1.0f, 1.0f)
         createVisualEffect(player, 10)

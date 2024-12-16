@@ -32,7 +32,8 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         Hephaitos(this,cooldownManager),
         Heracules(this),
         Kali(this, cooldownManager),
-        Kutulu(this, cooldownManager)
+        Kutulu(this, cooldownManager),
+        Ra(this, cooldownManager)
     )
 
     init {
