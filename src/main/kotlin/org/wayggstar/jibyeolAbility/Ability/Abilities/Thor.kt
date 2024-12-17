@@ -27,6 +27,7 @@ class Thor(private var gameManager: GameManger) : Ability, Listener {
     override val rank: String = "A"
 
     override fun activate() {
+
     }
 
     @EventHandler

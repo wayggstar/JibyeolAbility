@@ -83,7 +83,9 @@ class Herumes(private var gameManger: GameManger, private var cooldownManager: c
     fun onPlayerQuit(event: PlayerQuitEvent) {
         val player = event.player
         flyingPlayers.remove(player)
-        player.allowFlight = false
+        if (player.gameMode != GameMode.CREATIVE) {
+            player.allowFlight = false
+        }
     }
 
     @EventHandler

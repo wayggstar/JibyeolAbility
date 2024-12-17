@@ -14,6 +14,8 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
 
     companion object {
         public var ready: Boolean = false
+        public var refusestreak: MutableMap<Player, Int> = mutableMapOf<Player, Int>().withDefault { key: Player -> 0}
+        public var maxrefuse: Int = 1
     }
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -72,8 +74,11 @@ class Command(private val gameManger: GameManger): CommandExecutor, TabCompleter
 
                 "거절" -> {
                     if (!ready){return false}
-                    gameManger.reassignAbility(sender) // 능력 거절 처리
+                    if (gameManger.gameplaying){return false}
+                    if (refusestreak.get(sender)!! >= maxrefuse){ return false}
+                    gameManger.reassignAbility(sender)
                     sender.sendMessage("§c능력이 거절되었습니다. 새로운 능력이 재배정되었습니다.")
+                    refusestreak.put(sender, refusestreak.get(sender)!! + 1)
                     Bukkit.broadcastMessage("${sender.name}§a님이 능력을 거절하고 새로운 능력이 재배정되었습니다.")
                     return true
                 }

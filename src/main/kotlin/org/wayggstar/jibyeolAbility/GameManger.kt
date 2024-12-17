@@ -34,7 +34,8 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         Kali(this, cooldownManager),
         Kutulu(this, cooldownManager),
         Ra(this, cooldownManager),
-        Yormungande(this, cooldownManager)
+        Yormungande(this, cooldownManager),
+        Chukuyomi(this,cooldownManager)
     )
 
     init {
@@ -121,6 +122,7 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         Bukkit.getOnlinePlayers().forEach {
             playerAbilities.remove(it)
             gameplaying = false
+            Command.refusestreak.put(it, 0)
         }
         Bukkit.broadcastMessage("§c게임이 종료되었습니다!")
     }
