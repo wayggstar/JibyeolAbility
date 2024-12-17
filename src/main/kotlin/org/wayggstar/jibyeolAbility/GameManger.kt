@@ -35,7 +35,9 @@ class GameManger(private val plugin: JavaPlugin, private val cooldownManager: co
         Kutulu(this, cooldownManager),
         Ra(this, cooldownManager),
         Yormungande(this, cooldownManager),
-        Chukuyomi(this,cooldownManager)
+        Chukuyomi(this,cooldownManager),
+        Poseidon(this, cooldownManager),
+        Ragnarok(this, cooldownManager)
     )
 
     init {
